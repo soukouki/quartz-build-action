@@ -7,10 +7,16 @@ DESTINATION_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_DESTINATION
 
 mv $SOURCE_DIRECTORY/* /quartz/content/
 
+echo "pwd"
 pwd
+echo "ls"
 ls
+echo "echo $INPUT_PAGE_TITLE"
 echo $INPUT_QUARTZ_CONFIG
+echo "echo $INPUT_PAGE_BASE_URL"
 echo $INPUT_QUARTZ_LAYOUT
+echo "ls $SOURCE_DIRECTORY"
+ls $SOURCE_DIRECTORY
 
 # config
 if [ -n "$INPUT_QUARTZ_CONFIG" ]; then
