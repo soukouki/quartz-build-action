@@ -7,6 +7,11 @@ DESTINATION_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_DESTINATION
 
 mv $SOURCE_DIRECTORY/* /quartz/content/
 
+pwd
+ls
+echo $INPUT_QUARTZ_CONFIG
+echo $INPUT_QUARTZ_LAYOUT
+
 # config
 if [ -n "$INPUT_QUARTZ_CONFIG" ]; then
     echo "Copying custom config (${GITHUB_WORKSPACE}/$INPUT_QUARTZ_CONFIG -> $(pwd)/)"
