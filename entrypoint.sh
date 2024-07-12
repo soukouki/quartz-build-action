@@ -5,19 +5,6 @@ cd /quartz
 SOURCE_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_SOURCE
 DESTINATION_DIRECTORY=${GITHUB_WORKSPACE}/$INPUT_DESTINATION
 
-mv $SOURCE_DIRECTORY/* /quartz/content/
-
-echo "pwd"
-pwd
-echo "ls"
-ls
-echo "echo $INPUT_PAGE_TITLE"
-echo $INPUT_QUARTZ_CONFIG
-echo "echo $INPUT_PAGE_BASE_URL"
-echo $INPUT_QUARTZ_LAYOUT
-echo "ls $SOURCE_DIRECTORY"
-ls $SOURCE_DIRECTORY
-
 # config
 if [ -n "$INPUT_QUARTZ_CONFIG" ]; then
     echo "Copying custom config (${GITHUB_WORKSPACE}/$INPUT_QUARTZ_CONFIG -> $(pwd)/)"
@@ -35,6 +22,8 @@ if [ -n "$INPUT_QUARTZ_LAYOUT" ]; then
     echo "Copying custom layout (${GITHUB_WORKSPACE}/$INPUT_QUARTZ_LAYOUT -> $(pwd)/)"
     cp ${GITHUB_WORKSPACE}/$INPUT_QUARTZ_LAYOUT .
 fi
+
+mv $SOURCE_DIRECTORY/* /quartz/content/
 
 # build
 npx quartz build -o $DESTINATION_DIRECTORY -v
