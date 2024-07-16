@@ -36,6 +36,7 @@ fi
 
 # content
 mv $SOURCE_DIRECTORY/* /quartz/content/
+mv $SOURCE_DIRECTORY/.git /quartz/content/
 
 # build
 npx quartz build -o $DESTINATION_DIRECTORY -v
