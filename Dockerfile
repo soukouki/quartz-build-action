@@ -1,17 +1,15 @@
-ARG NODE_VERSION=20
-FROM node:$NODE_VERSION-alpine
+ARG NODE_VERSION=22
+FROM node:${NODE_VERSION}-alpine
+
+RUN apk add --no-cache git coreutils \
+    && git clone --depth 1 https://github.com/soukouki/quartz.git -b soukouki/missing-link /quartz \
+    && cd /quartz \
+    && mkdir -p content \
+    && npm ci --only=production \
+    && npx quartz create -X new -l shortest
 
 WORKDIR /quartz
 
-RUN apk add git
+COPY --chmod=755 entrypoint.sh /
 
-RUN git clone https://github.com/soukouki/quartz.git -b soukouki/missing-link /quartz && cd quartz
-
-RUN npm i
-# required as directory was removed from original quartz repo
-RUN mkdir -p content && touch content/.gitkeep
-RUN npx quartz create -X new -l shortest
-
-COPY entrypoint.sh /
-
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT ["/entrypoint.sh"]
